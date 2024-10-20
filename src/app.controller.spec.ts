@@ -1,8 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import {suite, test, beforeEach} from 'node:test';
+import assert from 'node:assert';
 
-describe('AppController', () => {
+suite('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
@@ -14,9 +16,9 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  suite('root', () => {
+    test('should return "Hello World!"', () => {
+      assert.strictEqual(appController.getHello(),'Hello World!');
     });
   });
 });

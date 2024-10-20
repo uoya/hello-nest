@@ -1,9 +1,11 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import request from 'supertest';
+import { AppModule } from '../src/app.module';
 import type { NestExpressApplication } from '@nestjs/platform-express';
+import {suite, test, beforeEach} from 'node:test';
+import assert from 'node:assert';
 
-describe('AppController (e2e)', () => {
+suite('AppController (e2e)', () => {
   let app: NestExpressApplication;
 
   beforeEach(async () => {
@@ -15,10 +17,10 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  test('/ (GET)', async () => {
+    const res = await request(app.getHttpServer()).get('/');
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.body, "Hello World!");
+    return;
   });
 });

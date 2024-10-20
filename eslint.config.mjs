@@ -9,7 +9,8 @@ export default [
   ...tseslint.configs.recommendedTypeChecked,
   {
     rules: {
-      eqeqeq: "error"
+      eqeqeq: "error",
+      '@typescript-eslint/no-floating-promises': 'off', // Enable the test function rewriting method when found.
     }
   },
   {
